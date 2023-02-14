@@ -18,6 +18,9 @@ function displayDetails() {
      var country = document.getElementById("country").value;
      var pobox = document.getElementById("pobox").value;
 
+     let employee = {fname, lname, age, salary, zip, city, street, country};
+     console.log(employee);
+
      if (!fname || !lname || !age || !salary || !zip || !city || !street || !country || !pobox) {
           alert("Please fill in all the boxes");
           return;
