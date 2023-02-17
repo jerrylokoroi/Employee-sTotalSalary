@@ -8,6 +8,8 @@ entry.addEventListener("click", displayDetails);
 
 function displayDetails() {
 
+     let employees = [];
+
      var fname = document.getElementById("fname").value;
      var lname = document.getElementById("lname").value;
      var age = document.getElementById("age").value;
@@ -20,6 +22,9 @@ function displayDetails() {
 
      let employee = {fname, lname, age, salary, zip, city, street, country};
      console.log(employee);
+
+     employees.push(employee);
+     console.log(employees);
 
      if (!fname || !lname || !age || !salary || !zip || !city || !street || !country || !pobox) {
           alert("Please fill in all the boxes");
