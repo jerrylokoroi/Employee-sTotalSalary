@@ -5,17 +5,19 @@
  */
 const EmployeeController = ( function () {
 
-    const Employer =  function( id, firstName, lastName, Age, salary, zip, city, street, country, poBox ) {
-        this.id = id
-        this.firstName = firstName
-        this.lastName = lastName
-        this.Age = age
-        this.salary = salary
-        this.zip = zip
-        this.city = city
-        this.street = street
-        this.country = country
-        this.poBox = poBox
+    class Employee {
+        constructor(id, firstName, lastName, Age, salary, zip, city, street, country, poBox) {
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.Age = Age;
+            this.salary = salary;
+            this.zip = zip;
+            this.city = city;
+            this.street = street;
+            this.country = country;
+            this.poBox = poBox;
+        }
     }
 
     /**
@@ -39,7 +41,17 @@ const EmployeeController = ( function () {
              */
             if ( data.allEmployees.length > 0 ) {
                 ID = data.allEmployees[data.allEmployees.length - 1].id + 1
+            } else {
+                ID = 0
             }
+
+            newEmployee = new Employee(ID, fName, lName, Age, salary, city, street, country, poBox)
+
+            data.allEmployees.push(newEmployee)
+
+            console.log('data', data);
+
+            return newEmployee
         }
     }
 
@@ -86,7 +98,7 @@ const UIController = ( function () {
          * @returns DOM strings
          */
         getDomStrings: function() {
-            return DOMStrings
+            return DOMStrings;
         },
 
         /**
@@ -104,6 +116,47 @@ const UIController = ( function () {
                 country: document.querySelector(DOMStrings.inputCountry).value,
                 poBox: document.querySelector(DOMStrings.inputPoBox).value,
             }
+        },
+
+        /**
+         * Add Employee to UI table
+         */
+        uiAddEmployees: function(employee) {
+            // let row, emplContainer;
+
+            console.log(document.querySelector(DOMStrings.employeeDisplay));
+
+            emplContainer = document.querySelector(DOMStrings.employeeDisplay)
+
+            // Create table
+            row = 1
+            const newRow = emplContainer.insertRow(row);
+
+            // insert columns
+            const cel1  = newRow.insertCell(0);
+            const cel2  = newRow.insertCell(1);
+            const cel3  = newRow.insertCell(2);
+            const cel4  = newRow.insertCell(3);
+            const cel5  = newRow.insertCell(4);
+            const cel6  = newRow.insertCell(5);
+            const cel7  = newRow.insertCell(6);
+            const cel8  = newRow.insertCell(7);
+            const cel9  = newRow.insertCell(8);
+
+
+            cel1.innerHTML = employee.firstName;
+            cel2.innerHTML = employee.lastName;
+            cel3.innerHTML = employee.Age;
+            cel4.innerHTML = employee.salary;
+            cel5.innerHTML = employee.zip;
+            cel6.innerHTML = employee.city;
+            cel7.innerHTML = employee.street;
+            cel8.innerHTML = employee.country;
+            cel9.innerHTML = employee.poBox;
+
+            row++;
+
+
         }
     }
 })();
@@ -115,7 +168,7 @@ const UIController = ( function () {
  * Used to control the flow of the app.
  * Connect the EmployeeController and UIController
  */
-const AppController = ( function (employCtrl, UIctrl) {
+const AppController = ( function (employeeCtrl, UIctrl) {
 
     /**
      * Starting the application
@@ -130,9 +183,25 @@ const AppController = ( function (employCtrl, UIctrl) {
         /**
          * Add event Listener to the button and call the callback function when it is clicked
          */
-        document.querySelector(DOM.submitEntry).addEventListener('click', function (e) {
-            console.log(UIController.getInputs());
-        })
+        document.querySelector(DOM.submitEntry).addEventListener('click', ctrlAddEmployee);
+    }
+
+    /**
+     * Adding employee on UX.
+     */
+    const ctrlAddEmployee = function () {
+        let input, newEmployee;
+
+        input = UIController.getInputs();
+
+        console.log('input', input);
+
+        newEmployee = EmployeeController.addEmployee(input.fName, input.lName, input.age, input.salary, input.street, input.country, input.poBox, input.city );
+
+        console.log('Employee', newEmployee);
+
+        UIController.uiAddEmployees(newEmployee);
+
     }
 
 
