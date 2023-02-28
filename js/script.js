@@ -5,6 +5,45 @@
  */
 const EmployeeController = ( function () {
 
+    const Employer =  function( id, firstName, lastName, Age, salary, zip, city, street, country, poBox ) {
+        this.id = id
+        this.firstName = firstName
+        this.lastName = lastName
+        this.Age = age
+        this.salary = salary
+        this.zip = zip
+        this.city = city
+        this.street = street
+        this.country = country
+        this.poBox = poBox
+    }
+
+    /**
+     * Will be used to store all the employees
+     */
+    const data = {
+        allEmployees: [],
+        totalIncome: 0,
+    }
+
+    return {
+        /**
+         * Add item to all data array
+         */
+        addEmployee: function(fName, lName, Age, salary, city, street, country, poBox) {
+            let newEmployee, ID
+
+            /**
+             * Check if there are any other employees on the array
+             * if present select the last employee id and add one
+             */
+            if ( data.allEmployees.length > 0 ) {
+                ID = data.allEmployees[data.allEmployees.length - 1].id + 1
+            }
+        }
+    }
+
+
 })();
 
 
