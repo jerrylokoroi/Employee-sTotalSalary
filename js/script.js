@@ -6,7 +6,7 @@
 const EmployeeController = ( function () {
 
     class Employee {
-        constructor(id, firstName, lastName, Age, salary, zip, city, street, country, poBox) {
+        constructor(id, firstName, lastName, Age, salary, zip, city, street, country, inputPoBox) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
@@ -16,7 +16,7 @@ const EmployeeController = ( function () {
             this.city = city;
             this.street = street;
             this.country = country;
-            this.poBox = poBox;
+            this.inputPoBox = inputPoBox;
         }
     }
 
@@ -32,7 +32,7 @@ const EmployeeController = ( function () {
         /**
          * Add item to all data array
          */
-        addEmployee: function(fName, lName, Age, salary, city, street, country, poBox) {
+        addEmployee: function(fName, lName, Age, salary, city, zip, street, country, inputPoBox) {
             let newEmployee, ID
 
             /**
@@ -45,13 +45,35 @@ const EmployeeController = ( function () {
                 ID = 0
             }
 
-            newEmployee = new Employee(ID, fName, lName, Age, salary, city, street, country, poBox)
+            newEmployee = new Employee(ID, fName, lName, Age, salary, zip, city, street, country, inputPoBox)
 
             data.allEmployees.push(newEmployee)
 
             console.log('data', data);
 
             return newEmployee
+
+        },
+        /**
+         * Calculate the total salary for the employee
+         */
+        calculateTotalSalary: function() {
+
+            let sum = 0
+
+            data.allEmployees.forEach( function (current) {
+                sum += Number(current.salary)
+            })
+
+            console.log('sum', sum);
+
+            data.totalIncome = sum
+        },
+        /**
+         * Exposing the total salary for the employee
+         */
+        getTotalSalary: function() {
+            return data.totalIncome
         }
     }
 
@@ -114,7 +136,7 @@ const UIController = ( function () {
                 city: document.querySelector(DOMStrings.inputCity).value,
                 street: document.querySelector(DOMStrings.inputStreet).value,
                 country: document.querySelector(DOMStrings.inputCountry).value,
-                poBox: document.querySelector(DOMStrings.inputPoBox).value,
+                inputPoBox: document.querySelector(DOMStrings.inputPoBox).value,
             }
         },
 
@@ -123,8 +145,6 @@ const UIController = ( function () {
          */
         uiAddEmployees: function(employee) {
             // let row, emplContainer;
-
-            console.log(document.querySelector(DOMStrings.employeeDisplay));
 
             emplContainer = document.querySelector(DOMStrings.employeeDisplay)
 
@@ -152,11 +172,14 @@ const UIController = ( function () {
             cel6.innerHTML = employee.city;
             cel7.innerHTML = employee.street;
             cel8.innerHTML = employee.country;
-            cel9.innerHTML = employee.poBox;
+            cel9.innerHTML = employee.inputPoBox;
 
             row++;
 
 
+        },
+        displayTotalSalary: function(salary) {
+            document.querySelector(DOMStrings.totalSalary).value = salary;
         }
     }
 })();
@@ -194,14 +217,24 @@ const AppController = ( function (employeeCtrl, UIctrl) {
 
         input = UIController.getInputs();
 
-        console.log('input', input);
+        newEmployee = employeeCtrl.addEmployee(input.fName, input.lName, input.age, input.salary, input.zip,  input.city, input.street, input.country, input.inputPoBox );
 
-        newEmployee = EmployeeController.addEmployee(input.fName, input.lName, input.age, input.salary, input.street, input.country, input.poBox, input.city );
-
-        console.log('Employee', newEmployee);
 
         UIController.uiAddEmployees(newEmployee);
 
+        updateSalary()
+
+    }
+
+    /**
+     * update salary 
+     */
+    const updateSalary = function () {
+        employeeCtrl.calculateTotalSalary()
+
+        const totalSalary = employeeCtrl.getTotalSalary()
+
+        UIctrl.displayTotalSalary(totalSalary)
     }
 
 
