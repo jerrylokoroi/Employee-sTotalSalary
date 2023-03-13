@@ -1,82 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee's Tracker App</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-
-</head>
-
-<body>
-
-    
-
+  <body>
     <div class="grid-container">
+      <h1>Employee's Details</h1>
 
-        <h1>Employee's Details</h1>
-
-        <div class="in-container" id="input">
-
-
-            <div id="nameDiv" class="input"> First Name : <input type="text" id="fname" placeholder="John" />
-            </div>
-            <div id="nameDiv" class="input"> Last Name : <input type="text" id="lname" placeholder="Smith" />
-            </div>
-            <div class="input"> Age : <input type="number" id="age" />
-            </div>
-            <div class="input"> Salary : <input type="number" id="salary" placeholder="KES" />
-            </div>
-
-            <h2>Address data</h2>
-
-            <div id="nameDiv" class="input"> Zip : <input type="number" id="zip" />
-            </div>
-            <div id="nameDiv" class="input"> City : <input type="text" id="city" />
-            </div>
-            <div class="input"> Street : <input type="text" id="street" />
-            </div>
-            <div class="input"> Country : <input type="text" id="country" />
-            </div>
-            <div class="input"> P.O.Box : <input type="number" id="pobox" />
-            </div>
-
-
-            <button id="entry">Add</button>
-
-        </div>
-
-        <div class="input"> Total Salary : <input type="number" id="totalSalary" value="0" disabled />
-        </div>
-        
+      <form id="inputForm">
         <div class="in-container">
-
-            <h2>Employee List</h2>
-
-            <table id="display">
-                <tr>
-                    <th id="firstname">First Name</th>
-                    <th id="lastname">Last Name</th>
-                    <th id="age">Age</th>
-                    <th id="salary">Salary</th>
-                    <th>Zip</th>
-                    <th>City</th>
-                    <th>Street</th>
-                    <th>Coutry</th>
-                    <th>P.O.Box</th>
-                </tr>
-            </table>
-
+          Name: <input type="text" id="name" class="display" /> Age:
+          <input type="number" id="age" class="display" /> Salary:
+          <input type="number" id="salary" class="display" /> Email:
+          <input type="email" id="email" class="display" />
         </div>
 
+        <h2>Address data</h2>
 
+        <div class="in-container">
+          Zip: <input type="number" id="zip" class="display" /> City:
+          <input type="text" id="city" class="display" /> Street:
+          <input type="text" id="street" class="display" /> Country:
+          <input type="text" id="country" class="display" /> P.O.Box:
+          <input type="number" id="pobox" class="display" />
+        </div>
 
+        <input type="submit" value="submit" id="btn-submit" />
+      </form>
+
+      <div id="totalAmount" class="display">Total Salary :</div>
+
+      <div class="in-container">
+        <h2>Employee's List</h2>
+
+        <table id="display">
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Email</th>
+            <th>Zip</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>P.O.Box</th>
+          </tr>
+        </table>
+      </div>
     </div>
 
-    <script src="js/main.js"></script>
-
-</body>
-
+    <script src="js/final.js"></script>
+  </body>
 </html>
+
+<!-- <div class="in-container" id="inputForm">
+        <div class="input">
+          First Name : <input type="text" id="firstName" placeholder="John" />
+        </div>
+        <div class="input">
+          Last Name : <input type="text" id="lastName" placeholder="Smith" />
+        </div>
+        <div class="input">Age : <input type="number" id="age" /></div>
+        <div class="input">
+          Salary : <input type="number" id="salary" placeholder="KES" />
+        </div>
+
+        <h2>Address data</h2>
+
+        <div class="input">Zip : <input type="number" id="zip" /></div>
+        <div class="input">City : <input type="text" id="city" /></div>
+        <div class="input">Street : <input type="text" id="street" /></div>
+        <div class="input">Country : <input type="text" id="country" /></div>
+        <div class="input">P.O.Box : <input type="number" id="pobox" /></div>
+
+        <input id="btn-add" type="submit" value="submit">
+      </div>
+
+      <div class="input">
+        Total Salary :
+        <input type="number" id="totalAmount" value="0" disabled />
+      </div>
+
+      <div class="in-container">
+        <h2>Employee List</h2>
+
+        <table id="display">
+          <tr>
+            <th id="firstname">First Name</th>
+            <th id="lastname">Last Name</th>
+            <th id="age">Age</th>
+            <th id="salary">Salary</th>
+            <th>Zip</th>
+            <th>City</th>
+            <th>Street</th>
+            <th>Coutry</th>
+            <th>P.O.Box</th>
+          </tr>
+        </table>
+      </div>
+    </div> -->
