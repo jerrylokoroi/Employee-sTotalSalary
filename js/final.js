@@ -1,11 +1,12 @@
-// let row = 1;
+let row = 1;
 let employees = [];
 let totalAmount = 0;
 let myForm = document.getElementById("inputForm");
 
 myForm.addEventListener("submit", function (j) {
   j.preventDefault();
-  let Name = getElementById("name");
+  //let inputs = myForm.elements;
+  let fullName = getElementById("name");
   let age = getElementById("age");
   // allow the typeof salary to accept float/decimals
   let salary = parseFloat(getElementById("salary"));
@@ -15,20 +16,23 @@ myForm.addEventListener("submit", function (j) {
   let country = getElementById("country");
   let pobox = getElementById("pobox");
   let employee = {
-    Name: name,
+    fullName: fullName,
     Age: age,
-    Salary: salary,
+    salary: salary,
     Zip: zip,
     City: city,
     street: street,
     Country: country
   };
-  addEmployeesToArray(employee);
+
   console.log(employee);
   console.log(employees);
+  addEmployeesToArray(employee);
+  let totalAmount = totalSalary();
+  displayTotalSalary(totalAmount);
 
   if (
-    !name ||
+    !fullName ||
     !age ||
     !salary ||
     !zip ||
@@ -40,10 +44,6 @@ myForm.addEventListener("submit", function (j) {
     alert("Please fill in all the boxes");
     return;
   }
-
-  let totalAmount = totalSalary();
-  displayTotalSalary(totalAmount);
-  totalSalary();
 });
 
 function getElementById(id) {
@@ -54,7 +54,7 @@ function addEmployeesToArray(employee) {
   employees.push(employee);
 }
 
-function displayDetails() {
+function displayDetails(id) {
   let display = document.getElementById("display");
 
   let newRow = display.insertRow(row);
@@ -68,7 +68,7 @@ function displayDetails() {
   let cell7 = newRow.insertCell(6);
   let cell8 = newRow.insertCell(7);
 
-  cell1.innerHTML = name;
+  cell1.innerHTML = fullName;
   cell2.innerHTML = age;
   cell3.innerHTML = salary;
   cell4.innerHTML = zip;
@@ -77,6 +77,7 @@ function displayDetails() {
   cell7.innerHTML = country;
   cell8.innerHTML = pobox;
 
+  getElementById(id);
   totalSalary();
   displayTotalSalary(totalAmount);
 }
@@ -88,8 +89,16 @@ function displayTotalSalary(totalAmount) {
 
 function totalSalary() {
   let total = 0;
-  employees.forEach((employee) => {
-    total += employees.salary;
+  employees.forEach(employee => {
+    total += employee.salary;
   });
   return total;
 }
+
+// function totalSalary() {
+//   let total = 0;
+//   employees.forEach((employee) => {
+//     total += employee.salary;
+//   });
+//   return total;
+// }
