@@ -3,8 +3,8 @@ let employees = [];
 let totalAmount = 0;
 let myForm = document.getElementById("inputForm");
 
-myForm.addEventListener("submit", function (j) {
-  j.preventDefault();
+myForm.addEventListener("submit", function (submitEvent) {
+  submitEvent.preventDefault();
   //let inputs = myForm.elements;
   let fullName = getElementById("name");
   let age = getElementById("age");
@@ -15,21 +15,26 @@ myForm.addEventListener("submit", function (j) {
   let street = getElementById("street");
   let country = getElementById("country");
   let pobox = getElementById("pobox");
+
+  
   let employee = {
     fullName: fullName,
-    Age: age,
+    age: age,
     salary: salary,
-    Zip: zip,
-    City: city,
+    zip: zip,
+    city: city,
     street: street,
-    Country: country
+    country: country,
+    pobox: pobox
   };
 
   console.log(employee);
   console.log(employees);
+
   addEmployeesToArray(employee);
-  let totalAmount = totalSalary();
+  let totalAmount = calculateTotalSalary();
   displayTotalSalary(totalAmount);
+  displayDetails(employee);
 
   if (
     !fullName ||
@@ -54,7 +59,7 @@ function addEmployeesToArray(employee) {
   employees.push(employee);
 }
 
-function displayDetails(id) {
+function displayDetails(employee) {
   let display = document.getElementById("display");
 
   let newRow = display.insertRow(row);
@@ -68,18 +73,15 @@ function displayDetails(id) {
   let cell7 = newRow.insertCell(6);
   let cell8 = newRow.insertCell(7);
 
-  cell1.innerHTML = fullName;
-  cell2.innerHTML = age;
-  cell3.innerHTML = salary;
-  cell4.innerHTML = zip;
-  cell5.innerHTML = city;
-  cell6.innerHTML = street;
-  cell7.innerHTML = country;
-  cell8.innerHTML = pobox;
+  cell1.innerHTML = employee.fullName;
+  cell2.innerHTML = employee.age;
+  cell3.innerHTML = employee.salary;
+  cell4.innerHTML = employee.zip;
+  cell5.innerHTML = employee.city;
+  cell6.innerHTML = employee.street;
+  cell7.innerHTML = employee.country;
+  cell8.innerHTML = employee.pobox;
 
-  getElementById(id);
-  totalSalary();
-  displayTotalSalary(totalAmount);
 }
 
 function displayTotalSalary(totalAmount) {
@@ -87,7 +89,7 @@ function displayTotalSalary(totalAmount) {
   totalAmountOfElement.innerHTML = totalAmount;
 }
 
-function totalSalary() {
+function calculateTotalSalary() {
   let total = 0;
   employees.forEach(employee => {
     total += employee.salary;
